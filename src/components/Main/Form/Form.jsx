@@ -3,12 +3,14 @@ import { TextField, Typography, Grid, Button, FormControl, InputLabel, Select, M
 import { ExpenseTrackerContext } from '../../../context/context';
 import useStyles from './styles'
 import { v4 as uuidv4 } from 'uuid'
+import { expenseCategories, incomeCategories } from '../../../constants/categories';
+import formatDate from '../../../utils/formatDate';
 
 const initialState ={
     amount:'',
     category:'',
-    type:'',
-    date:new Date(),
+    type:'Income',
+    date: formatDate(new Date()),
 }
 const Form = () => {
     const classes = useStyles();
@@ -23,6 +25,9 @@ const Form = () => {
         addTransaction(transaction);
         setformData(initialState);
     }
+
+    const selectedCategories = formData.type === 'Income' ? incomeCategories : expenseCategories;
+
     return (
         <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -43,8 +48,9 @@ const Form = () => {
                 <FormControl fullWidth>
                     <InputLabel>Cataegory</InputLabel>
                     <Select value={formData.category} onChange={(e)=>setformData({...formData,category:e.target.value})}>
-                        <MenuItem value="business"> Business </MenuItem>
-                        <MenuItem value="salary"> Salary </MenuItem>
+                       {selectedCategories.map((c)=>(
+                            <MenuItem key={c.type} value={c.type}> {c.type} </MenuItem>
+                       ))}
                     </Select>
                 </FormControl>
             </Grid>
@@ -52,7 +58,7 @@ const Form = () => {
                 <TextField type="number" label="Amount" fullwidth value={formData.amount} onChange={(e)=>setformData({...formData,amount:e.target.value})}/>
             </Grid>
             <Grid item xs={6}>
-                <TextField type="date" label="Date" fullwidth value={formData.date} onChange={(e)=>setformData({...formData,date:e.target.value})}/>
+                <TextField type="date" label="Date" fullwidth value={formData.date} onChange={(e)=>setformData({...formData,date:formatDate(e.target.value)})}/>
             </Grid>
             <Button className={classes.button} variant="outlined" color="primary" fullWidth onClick={createTransaction}>Create</Button>
         </Grid>
