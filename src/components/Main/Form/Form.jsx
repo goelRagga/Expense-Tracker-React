@@ -6,18 +6,21 @@ import { v4 as uuidv4 } from 'uuid'
 import { expenseCategories, incomeCategories } from '../../../constants/categories';
 import formatDate from '../../../utils/formatDate';
 
+
+
 const initialState ={
     amount:'',
     category:'',
     type:'Income',
     date: formatDate(new Date()),
 }
+
 const Form = () => {
     const classes = useStyles();
     const [formData, setformData] = useState(initialState);
-    
+      
     const { addTransaction } = useContext(ExpenseTrackerContext);
-    console.log(formData);
+
     
     const createTransaction =() =>{
         
@@ -31,9 +34,7 @@ const Form = () => {
     return (
         <Grid container spacing={2}>
             <Grid item xs={12}>
-                <Typography>
-                    .....
-                </Typography>
+              
             </Grid>
             <Grid item xs={12}>
                 <FormControl fullWidth>

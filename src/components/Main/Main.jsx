@@ -10,12 +10,11 @@ const Main = () => {
 
     return (
         <Card className={classes.root}>
-            <CardHeader title={"Expense Tracker"} subheader="Powered by Speechly" />
+            <CardHeader title={"Expense Tracker"} subheader="Made by Raghav" />
             <CardContent>
                 <Typography align="center" variant="h5">Toal Balance $100</Typography>
                 <Typography variant="subtitle1" style={{lineHeight: '1.5em', marginTop: '20px' }}>
-                    {/*Info Card.....*/}
-                    Try Saying: Add income for $100 in Cataegory Salary for Monday...
+                   Enter the Details
                 </Typography>
                 <Divider/>
                 <Form/>
